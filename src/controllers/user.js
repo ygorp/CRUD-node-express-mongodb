@@ -9,8 +9,12 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const user = await createUser(req.body)
-    res.status(201).send(user)
+    try {
+        const user = await createUser(req.body)
+        res.status(201).send(user)
+    } catch (error) {
+       res.status(400).send(error)
+    }
 })
 
 router.delete('/', (req, res) => {
